@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+
+<style>
+.column {
+  float: left;
+  width: 23.33%;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+    
+</style>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data visualisation</title>
+    <h1> <span style="font-family:Courier; color:Blue; font-size: 30px"> Data visualisation </span> </h1>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+
+  </head>
+  <body>
+    <p style="font-size:150%;"> The average deal value for the year 2021 was <strong>{{ av | safe }}</strong> 
+    However, the standard deviation was found to be {{ std | safe }} along with a median {{ med | safe }}. 
+    Overall, although the average was shown to be high, a large standard deviation indicates a high variance
+    in the data. Thus, median would be more descriptive. 
+    </p>
+<br>
+
+<strong style="font-size:170%;">  Number of won deals by month in 2021 </strong>
+<canvas id="won_deals_month" width="400" height="400"></canvas>
+      <script>
+          new Chart(document.getElementById("won_deals_month"), {
+          type: 'bar',
+
+          data: {
+            labels: {{ x1 | safe }},
+            datasets: [
+              {
+              label: "",
+                backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850", "#ffce56", "#cc65fe", "ff6384", "#36a2eb"], 
+                data: {{ y1 | safe }}
+              }
+            ]
+          },
+          options: {
+            responsive: false,
+            maintainAspectRatio: false,
+            title: {
+              display: false,
+            }
+          }
+      });
+    </script>
+<br>
+
+<strong style="font-size:170%;">   Number of won deals by company in 2021 </strong>
+
+<canvas id="won_deals_comp" width="800" height="600"></canvas>
+      <script>
+          new Chart(document.getElementById("won_deals_comp"), {
+          type: 'bar',
+
+          data: {
+            labels: {{ x2 | safe }},
+            datasets: [
+              {
+              label: "",
+                backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850", "#ffce56", "#cc65fe", "ff6384", "#36a2eb",
+                "#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850", "#ffce56", "#cc65fe", "ff6384", "#36a2eb",
+                "#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850", "#ffce56", "#cc65fe", "ff6384", "#36a2eb",
+                "#8e5ea2","#3cba9f","#e8c3b9","#c45850", "#ffce56", "#cc65fe", "ff6384", "#36a2eb",
+                "#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850"], 
+                data: {{ y2 | safe }}
+              }
+            ]
+          },
+           options: {
+
+          scaleShowValues: true,
+          scales: {
+            xAxes: [{
+              ticks: {
+                autoSkip: false
+              }
+            }]
+          }
+
+          }
+           }
+      );
+    </script>
+
+<br>
+
+<strong style="font-size:170%;">  Status of the different companies   </strong>
+
+
+    <canvas id="piechart" width="400" height="400" ></canvas>
+          <script>
+              new Chart(document.getElementById("piechart"), {
+              type: 'pie',
+
+              data: {
+                labels: {{ pie_keys | safe }},
+                datasets: [
+                  {
+                  label: "",
+                    backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850", "#ffce56", "#cc65fe", "ff6384", "#36a2eb"], 
+                    data: {{ pie_values | safe }}
+                  }
+                ]
+              },
+            options: {
+            responsive: false,
+            maintainAspectRatio: false,
+
+              legend: { display: true },
+              title: {
+                display: false,
+              }
+            }
+        });
+
+        </script>
+
+
+<div class="row"></div>
+
+<div class="column"
+
+<p id="Customers" style="font-family:Courier; color:Blue; font-size: 15px;"> </p>
+<strong>  Customers   </strong>
+<p>
+    {{ customers | safe }}
+</p>
+</div>
+
+<div class="column"
+
+<p id="Inactives" style="font-family:Courier; color:Purple; font-size: 15px;"> </p>
+<strong>  Inactives  </strong>
+<p>
+
+    {{ inactives | safe }}
+
+</p>
+</div>
+
+
+<div class="column"
+
+<p id="Not interested" style="font-family:Courier; color:Orange; font-size: 15px;"> </p>
+<strong>  Not interested  </strong>
+<p>
+
+    {{ notinterested | safe }}
+
+</p>
+</div>
+
+
+<div class="column"
+
+<p id="Prospects" style="font-family:Courier; color:Green; font-size: 15px;"> </p>
+<strong>  Prospects  </strong>
+<p>
+
+    {{ prospects | safe }}
+
+</p>
+
+</div>
+
+</div>
+
+
+
+
+</body>
+</html>
+
+
