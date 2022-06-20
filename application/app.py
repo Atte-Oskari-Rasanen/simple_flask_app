@@ -291,7 +291,7 @@ def calculations(base_url):
 
 
 def home():
-    base_url = "https://api-test.lime-crm.com/api-test/api/v1/limeobject/deal/"
+    base_url = "base_url"
 
     data_list=calculations(base_url)      
 
